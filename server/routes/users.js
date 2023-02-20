@@ -49,7 +49,7 @@ userRouter.get("/", async (req, res) => {
 userRouter.delete("/", async (req, res) => {
   await USER.deleteMany();
 
-  res.send({ message: "Deleted Successfull" });
+  res.send({ message: "Deleted Successfully" });
 });
 
 userRouter.get("/search/:key", async (req, res) => {
