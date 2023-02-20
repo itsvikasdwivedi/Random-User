@@ -1,0 +1,25 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 5%;
+  align-content: center;
+  align-items: center;
+  margin-top: 15%;
+}
+.App>button{
+  padding: 1% 1%;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+.filterdiv{
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+}
+
+
+
+
+

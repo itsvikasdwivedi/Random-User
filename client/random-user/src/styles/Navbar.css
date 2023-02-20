@@ -1,0 +1,15 @@
+.navbar{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    background-color: rgb(19,25,33);
+    color: white;
+    position: sticky;
+    top: 0;
+}
+.navbar>h3{
+    cursor: pointer;
+}
+.navbar>h3:hover{
+    color: rgb(145, 137, 137);
+}
