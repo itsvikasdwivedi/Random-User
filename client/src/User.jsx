@@ -2,8 +2,8 @@ import axios from "axios";
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import "./styles/User.css";
-
+import TableContainer from '@mui/material/TableContainer';
+import { InputLabel, MenuItem, Select, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 const User = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterTerm, setfilterTerm] = useState("");
@@ -18,7 +18,7 @@ const User = () => {
   }, [filterTerm]);
   const getDataFunction = () => {
     axios
-      .get(`https://random-user-qw68.onrender.com/user?page=${pageNumber}`)
+      .get(`https://random-user-production.up.railway.app/user?page=${pageNumber}`)
       .then((res) => {
         settotal_Pages(res.data.totalPages);
         setdata(res.data.blog);
@@ -45,7 +45,7 @@ const User = () => {
 
   const filterByGender = (e) => {
     axios
-      .get(`https://random-user-qw68.onrender.com/user/search/${e.target.value}`)
+      .get(`https://random-user-production.up.railway.app/user/search/${e.target.value}`)
       .then((res) => {
         setdata(res.data);
         console.log(e.target.value);
@@ -60,7 +60,8 @@ const User = () => {
     <div className="user_page_container">
       <div className="filterdiv">
         <div>
-          <select
+        <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+          <Select
             onChange={filterByGender}
             style={{
               width: "200px",
@@ -69,11 +70,11 @@ const User = () => {
               marginTop: "5%",
             }}
           >
-            <option>Filter by Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
+            <MenuItem value="male">Male</MenuItem>
+            <MenuItem value="female">Female</MenuItem>
+          </Select>
         </div>
+
         <div>
           <input
             style={{
@@ -91,52 +92,59 @@ const User = () => {
         </div>
       </div>
       <div className="userTable_div">
-        <table className="userTable">
-          <thead>
-            <tr>
-              <th>User Picture</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Gender</th>
-              <th>Email</th>
-              <th>Location</th>
-              <th>Nationality</th>
-              <th>Pin</th>
-            </tr>
-          </thead>
-          {data
-            .filter((val) => {
-              if (searchTerm === "") {
-                return val;
-              } else if (
-                val.first.toLowerCase().includes(searchTerm.toLowerCase())
-              ) {
-                return val;
-              }
-            })
-            .map((e) => {
-              return (
-                <tbody key={e._id}>
-                  <tr>
-                    <td>
-                      <img src={e.picture} alt="img" />
-                    </td>
-                    <td>{e.first}</td>
-                    <td>{e.last}</td>
-                    <td>{e.gender}</td>
-                    <td>{e.email}</td>
-                    <td>{e.location}</td>
-                    <td>{e.nat}</td>
-                    <td>{e.pin}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-        </table>
+        <TableContainer className="userTable">
+          <Table>
+
+
+            <TableHead>
+              <TableRow>
+              <TableCell>User Picture</TableCell>
+                <TableCell>First Name</TableCell>
+                <TableCell>Last Name</TableCell>
+                <TableCell>Gender</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Location</TableCell>
+                <TableCell>Nationality</TableCell>
+                <TableCell>Pin</TableCell>
+              </TableRow>
+            </TableHead>
+
+            {data
+              .filter((val) => {
+                if (searchTerm === "") {
+                  return val;
+                } else if (
+                  val.first.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return val;
+                }
+              })
+              .map((e) => {
+                return (
+                  <TableBody key={e._id}>
+                     <TableRow>
+                      
+                      <TableCell>
+                        <img src={e.picture} alt="img" />
+                      </TableCell>
+                      <TableCell>{e.first}</TableCell>
+                      <TableCell>{e.last}</TableCell>
+                      <TableCell>{e.gender}</TableCell>
+                      <TableCell>{e.email}</TableCell>
+                      <TableCell>{e.location}</TableCell>
+                      <TableCell>{e.nat}</TableCell>
+                      <TableCell>{e.pin}</TableCell>
+        
+                     </TableRow>
+                    </TableBody>
+                
+                );
+              })}
+          </Table>
+        </TableContainer>
       </div>
 
       <div className="pagination_container">
-        {/* <div>Page No. : {pageNumber + 1}</div> */}
         <div className="pagination">
           <button onClick={gotoPrevious}>≪</button>
           {pages.map((pageIndex, i) => (

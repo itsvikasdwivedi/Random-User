@@ -14,7 +14,7 @@ const Home = () => {
   
   const getBlogFunction = ()=>{
     
-    axios.get("https://random-user-qw68.onrender.com/user?page=0")
+    axios.get("https://random-user-production.up.railway.app/user?page=0")
     .then((res)=>{
       let arr = res.data.blog
       if(arr.length === 0){
@@ -31,7 +31,7 @@ const Home = () => {
 
   const fetchButton = () => {
     if(sign===false){
-      axios.post("https://random-user-qw68.onrender.com/user")
+      axios.post("https://random-user-production.up.railway.app/user")
       .then((res)=>{
         getBlogFunction();
         setSign(true)
@@ -45,7 +45,7 @@ const Home = () => {
 
   const deleteButton = () => {
     if(sign == true){
-      axios.delete("https://random-user-qw68.onrender.com/user")
+      axios.delete("https://random-user-production.up.railway.app/user")
     .then((res)=>{
       getBlogFunction()
     })

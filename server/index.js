@@ -19,6 +19,6 @@ app.get("/",(req,res)=>{
 
 app.listen( process.env.PORT || 8080, async()=>{
     await Connection
-    console.log("server started at http://localhost:8080");
+    console.log("server started at PORT 8080");
 })
 
